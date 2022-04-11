@@ -50,7 +50,7 @@ class SecurityController extends AbstractController
                 //->priority(Email::PRIORITY_HIGH)
                 ->subject('Time for Symfony Mailer!')
                 ->text('valider votre compte en appuions sur le lien ci dessous ')
-                ->html('<a >123hfhf789 </a>');
+                ->html('<a >123hfh4789 </a>');
 
             $mailer->send($email);
             return $this->redirectToRoute('app_home');
