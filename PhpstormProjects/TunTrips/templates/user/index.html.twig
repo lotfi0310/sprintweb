@@ -1,11 +1,28 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'back_office/base.html.twig' %}
 {% block content %}
+    <style>
+        .img{
+            width: 60px;
+            height: 60px;
+            background-size: cover;
+            display: block;
+            border-radius: 100px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+        }
+    </style>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
 
-    <h1>User index</h1>
-
-    <table class="table">
-        <thead>
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
@@ -31,7 +48,8 @@
                 <td>{{ user.passwd }}</td>
                 <td>{{ user.country }}</td>
                 <td>{{ user.role }}</td>
-                <td>{{ user.photo }}</td>
+                <td> <img  src="{{ asset('uploads/images/')}}{{ user.photo }}" alt="" class="img">
+                </td>
                 <td>{{ user.numTel }}</td>
                 <td>{{ user.valide ? 'Yes' : 'No' }}</td>
                 <td>{{ user.etat ? 'Yes' : 'No' }}</td>
@@ -47,6 +65,21 @@
         {% endfor %}
         </tbody>
     </table>
+
+                                                <!-- /.card-header -->
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+    <!-- /.content -->
 
 {% endblock %}
 

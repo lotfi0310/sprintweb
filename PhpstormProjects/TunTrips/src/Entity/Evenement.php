@@ -21,6 +21,14 @@ class Evenement
      */
     private $idevent;
 
+    public function __toString():String
+    {
+        return $this->idevent;
+
+
+
+    }
+
     /**
      * @var string
      *

@@ -1,0 +1,48 @@
+{% extends 'back_office/base.html.twig' %}
+
+{% block content %}
+<section class="contact py-lg-4 py-md-3 py-sm-3 py-3" id="contact"  >
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3" style="height: 46rem; overflow: hidden;">
+    <h1 style="margin-top: 2rem;">List reclamation</h1>
+    <table class="table" style="margin-top: 4rem;">
+        <thead>
+            <tr>
+                <th>Id User </th>
+                <th>Idrec</th>
+                <th>EvenementID</th>
+                <th>HebergementID</th>
+                <th>TransportID</th>
+                <th>Contenu</th>
+                <th>Date</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.id }}</td>
+                <td>{{ reclamation.idrec }}</td>
+                <td>{{ reclamation.idevent }}</td>
+                <td>{{ reclamation.idheberg }}</td>
+                <td>{{ reclamation.idtransport }}</td>
+                <td>{{ reclamation.contenu }}</td>
+                <td>{{ reclamation.date ? reclamation.date|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.etat ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_reclamation_show', {'idrec': reclamation.idrec}) }}">show</a>
+                    <a href="{{ path('app_reclamation_edit', {'idrec': reclamation.idrec}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reclamation_new') }}">Create new</a>
+    </div>
+    <section
+{% endblock %}

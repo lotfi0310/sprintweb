@@ -35,7 +35,9 @@ class RegistrationType extends AbstractType
                     )
 
             ))
-            ->add('photo',FileType::class)
+            ->add('photo',FileType::class,[
+                'label' => '(png or jpg file)'
+            ])
             ->add('numTel',NumberType::class)
             ->add('save',SubmitType::class)
 

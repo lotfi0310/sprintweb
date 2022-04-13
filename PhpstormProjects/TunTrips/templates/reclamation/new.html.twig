@@ -1,0 +1,21 @@
+
+
+{% extends 'front_office/base.html.twig' %}
+
+{% block content %}
+    <div class="row" >
+        <div class="col-md-8 offset-md-2">
+
+           <div style="margin-top: 8rem;" >
+               <h1>Create new Reclamation</h1>
+
+               {{ include('reclamation/_form.html.twig') }}
+
+               <a href="{{ path('app_reclamation_index') }}">back to list</a>
+           </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'front_office/base.html.twig' %}
+{% block content %}
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div  class="form-control" style="height: 45rem; margin-top: 5rem;">
+                    <form id="quickForm">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">code recu par mail</label>
+                                <input type="text" class="form-control" placeholder="Enter code">
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Valider</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

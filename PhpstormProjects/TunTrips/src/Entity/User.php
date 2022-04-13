@@ -3,17 +3,20 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
+use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
+use PhpParser\Node\Scalar\String_;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * User
- *
- * @ORM\Table(name="user", indexes={@ORM\Index(name="email", columns={"email"})})
  * @ORM\Entity
+ * @ORM\Table(name="user")
+ * @UniqueEntity(fields="email", message="This email is already taken.")
+ * @ORM\HasLifecycleCallbacks()
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -42,7 +45,7 @@ class User implements UserInterface
 
     /**
      * @var string
-     *
+
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
@@ -78,7 +81,7 @@ class User implements UserInterface
      * @var string|null
      *
      * @ORM\Column(name="photo", type="string", length=1000, nullable=true, options={"default"="NULL"})
-     * @Assert\File(mimeTypes={"image/png"})
+     * @Assert\File(mimeTypes={"image/png","image/jpg"})
      */
     private $photo ;
 
@@ -108,6 +111,8 @@ class User implements UserInterface
         return $this->id;
     }
 
+
+
     public function getNom(): ?string
     {
         return $this->nom;
@@ -118,6 +123,17 @@ class User implements UserInterface
         $this->nom = $nom;
 
         return $this;
+    }
+
+    public function __toString():String
+    {
+        return $this->id;
+        return $this->email;
+        return $this->nom;
+        return $this->passwd;
+        return $this->prenom;
+
+
     }
 
     public function getPrenom(): ?string
@@ -180,12 +196,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPhoto()
+    public function getPhoto():?string
     {
         return $this->photo;
     }
 
-    public function setPhoto($photo)
+    public function setPhoto(string $photo):self
     {
         $this->photo = $photo;
 
@@ -252,5 +268,15 @@ return ['ROLE_USER'] ;
     public function getPassword()
     {
         // TODO: Implement getPassword() method.
+    }
+
+    public function serialize()
+    {
+        // TODO: Implement serialize() method.
+    }
+
+    public function unserialize($data)
+    {
+        // TODO: Implement unserialize() method.
     }
 }

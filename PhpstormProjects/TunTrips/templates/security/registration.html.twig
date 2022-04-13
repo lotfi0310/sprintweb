@@ -1,22 +1,24 @@
 {% extends 'front_office/base.html.twig'%}
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block content %}
 
-    <section class="contact py-lg-4 py-md-3 py-sm-3 py-3" id="contact">
-    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
-
+    <section class="contact py-lg-4 py-md-3 py-sm-3 py-3" id="contact" >
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3" >
+<div style="height: 50rem; margin-top: 2rem;">
     {{ form_start(form) }}
     {{ form_row(form.nom,{'attr':{'placeholder':'Entrer votre Nom'}}) }}
-        {{ form_row(form.prenom,{'attr':{'placeholder':'Entrer votre prenom'}}) }}
-        {{ form_row(form.email,{'attr':{'placeholder':'Entrer votre adress mail...'}}) }}
-        {{ form_row(form.passwd,{'attr':{'placeholder':'Entrer votre mot de passe!'}}) }}
-        {{ form_row(form.confirm_password,{'attr':{'placeholder':'Confirmer  votre mot de passe !'}}) }}
-        {{ form_row(form.country,{'attr':{'placeholder':' selectionner votre pays'}}) }}
-        {{ form_row(form.role,{'attr':{'placeholder':'choisir un role'}}) }}
-        {{ form_row(form.photo,{'attr':{'placeholder':'selectionner une image  '}}) }}
-        {{ form_row(form.numTel,{'attr':{'placeholder':'Ecriver votre numero  '}}) }}
+    {{ form_row(form.prenom,{'attr':{'placeholder':'Entrer votre prenom'}}) }}
+    {{ form_row(form.email,{'attr':{'placeholder':'Entrer votre adress mail...'}}) }}
+    {{ form_row(form.passwd,{'attr':{'placeholder':'Entrer votre mot de passe!'}}) }}
+    {{ form_row(form.confirm_password,{'attr':{'placeholder':'Confirmer  votre mot de passe !'}}) }}
+    {{ form_row(form.country,{'attr':{'placeholder':' selectionner votre pays'}}) }}
+    {{ form_row(form.role,{'attr':{'placeholder':'choisir un role'}}) }}
+    {{ form_row(form.photo,{'attr':{'placeholder':'selectionner une image  '}}) }}
+    {{ form_row(form.numTel,{'attr':{'placeholder':'Ecriver votre numero  '}}) }}
 
     {{ form_end(form) }}
+</div>
+
 
 
     </div>

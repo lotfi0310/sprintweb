@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Codevalidation;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,13 +15,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class SecurityController extends AbstractController
 {
     /**
      * @Route("/inscription", name="security_registration")
      */
-    public function registration(Request $request,EntityManagerInterface  $manager,UserPasswordEncoderInterface $encoder,MailerInterface $mailer)
+    public function registration(Request $request,EntityManagerInterface  $manager,UserPasswordEncoderInterface $encoder,MailerInterface $mailer, TokenStorageInterface $tokenStorage)
     {
         $user=new User();
         $form=$this->createForm(RegistrationType::class,$user);
@@ -30,12 +34,15 @@ class SecurityController extends AbstractController
             $hash=$encoder->encodePassword($user,$user->getPasswd());
             $user->setPasswd($hash);
 
-            $file=$user->getPhoto();
+            $file = $form->get('photo')->getData();
+
             $file_name=md5(uniqid()).'.'.$file->guessExtension();
             try {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename.'-'.uniqid().'.'.$file->guessExtension();
              $file->move(
                $this->getParameter('images_directory'),
-                   $file_name
+                   $newFilename
              );
             }catch (FileException $e){
         }
@@ -51,13 +58,48 @@ class SecurityController extends AbstractController
                 ->subject('Time for Symfony Mailer!')
                 ->text('valider votre compte en appuions sur le lien ci dessous ')
                 ->html('<a >123hfh4789 </a>');
+            $token = new UsernamePasswordToken($user, $user->getPasswd(), 'main');
+            $tokenStorage->setToken($token);
 
             $mailer->send($email);
-            return $this->redirectToRoute('app_home');
+            $code =new Codevalidation();
+            $code->setCode('123hfh4789');
+            //$user->setEmail($form->getName());
+            //$code->setEmail($user);
+            $manager->persist($code);
+            $manager->flush();
+            return $this->redirectToRoute('validation');
         }
         return $this->render('security/registration.html.twig', [
             'form'=>$form->createView()
         ]);
     }
 
+    /**
+     * @Route("/login", name="app_login")
+     */
+    public function login(AuthenticationUtils $utils): Response
+    {
+        return $this->render('security/login.html.twig', [
+            'last_username' => $utils->getLastUsername(),
+            'error' => $utils->getLastAuthenticationError(),
+        ]);
+    }
+
+    /**
+     * @Route("/logout", name="app_logout")
+     */
+    public function logout(): void
+    {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    /**
+     * @Route ("/uservalidation",name="validation")
+     */
+    public function validationCompte(){
+
+        return $this->render('front_office/default/validation_compte.html.twig');
+
+    }
 }

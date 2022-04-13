@@ -20,7 +20,13 @@ class Transport
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idtransport;
+    public function __toString():String
+    {
+        return $this->idtransport;
 
+
+
+    }
     /**
      * @var string
      *
