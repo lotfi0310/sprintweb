@@ -4,11 +4,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div  class="form-control" style="height: 45rem; margin-top: 5rem;">
-                    <form id="quickForm">
+                    <form id="quickForm" method="post" action="{{ path('validation1') }}">
                         <div class="card-body">
-                            <div class="form-group">
+                            <div style="margin-top: 5rem;" class="form-group">
                                 <label for="exampleInputEmail1">code recu par mail</label>
-                                <input type="text" class="form-control" placeholder="Enter code">
+                                <input type="text" class="form-control" placeholder="Enter code" name="code" >
+                                <input type="hidden" value="{{ id }}" name="id">
                             </div>
 
                         </div>

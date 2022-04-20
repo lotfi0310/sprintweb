@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Evenement
  *
- * @ORM\Table(name="evenement")
+ * @ORM\Table(name="evenement", indexes={@ORM\Index(name="id", columns={"id"})})
  * @ORM\Entity
  */
 class Evenement
@@ -21,72 +21,162 @@ class Evenement
      */
     private $idevent;
 
-    public function __toString():String
-    {
-        return $this->idevent;
-
-
-
-    }
-
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255, nullable=false)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
-    private $address;
+    private $nom;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date", nullable=false)
+     * @ORM\Column(name="date_debut", type="date", nullable=false)
      */
-    private $date;
+    private $dateDebut;
 
     /**
-     * @var bool
+     * @var \DateTime
      *
-     * @ORM\Column(name="disponibilite", type="boolean", nullable=false)
+     * @ORM\Column(name="date_fin", type="date", nullable=false)
      */
-    private $disponibilite;
+    private $dateFin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lieu", type="string", length=255, nullable=false)
+     */
+    private $lieu;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=255, nullable=false)
+     */
+    private $status;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="capacite", type="integer", nullable=false)
+     */
+    private $capacite;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * })
+     */
+    private $id;
 
     public function getIdevent(): ?int
     {
         return $this->idevent;
     }
 
-    public function getAddress(): ?string
+    public function getNom(): ?string
     {
-        return $this->address;
+        return $this->nom;
     }
 
-    public function setAddress(string $address): self
+    public function setNom(string $nom): self
     {
-        $this->address = $address;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDateDebut(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->dateDebut;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDateDebut(\DateTimeInterface $dateDebut): self
     {
-        $this->date = $date;
+        $this->dateDebut = $dateDebut;
 
         return $this;
     }
 
-    public function getDisponibilite(): ?bool
+    public function getDateFin(): ?\DateTimeInterface
     {
-        return $this->disponibilite;
+        return $this->dateFin;
     }
 
-    public function setDisponibilite(bool $disponibilite): self
+    public function setDateFin(\DateTimeInterface $dateFin): self
     {
-        $this->disponibilite = $disponibilite;
+        $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    public function getLieu(): ?string
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(string $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getCapacite(): ?int
+    {
+        return $this->capacite;
+    }
+
+    public function setCapacite(int $capacite): self
+    {
+        $this->capacite = $capacite;
+
+        return $this;
+    }
+
+    public function getId(): ?User
+    {
+        return $this->id;
+    }
+
+    public function setId(?User $id): self
+    {
+        $this->id = $id;
 
         return $this;
     }

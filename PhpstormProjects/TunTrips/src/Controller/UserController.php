@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Reclamation;
 use App\Entity\User;
+use App\Form\ReclamationType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

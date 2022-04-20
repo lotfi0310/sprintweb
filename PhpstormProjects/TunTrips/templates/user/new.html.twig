@@ -1,11 +1,31 @@
-<!DOCTYPE html>
-
+{% extends 'front_office/base.html.twig' %}
 <title>New User</title>
+<div class="main-top" id="home">
+    <!-- banner -->
+    <div class="main-banner">
+        <div class="container-fluid">
+            <div class="style-banner ">
+                <div class="row">
 
-{% block body %}
-    <h1>Create new User</h1>
 
-    {{ include('user/_form.html.twig') }}
+                    <div class="col-lg-8 col-md-8 col-sm-9">
+                        <div class="banner-right-txt">
+                            {% block content %}
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
-{% endblock %}
+                                <h1>Create new User</h1>
+
+                                {{ include('user/_form.html.twig') }}
+
+                                <a href="{{ path('app_user_index') }}">back to list</a>
+
+                            {% endblock %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- //banner -->
+</div>

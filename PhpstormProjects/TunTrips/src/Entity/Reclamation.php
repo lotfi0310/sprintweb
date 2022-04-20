@@ -43,16 +43,6 @@ class Reclamation
     private $etat;
 
     /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
-     * })
-     */
-    private $id;
-
-    /**
      * @var \Evenement
      *
      * @ORM\ManyToOne(targetEntity="Evenement")
@@ -71,6 +61,16 @@ class Reclamation
      * })
      */
     private $idtransport;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * })
+     */
+    private $id;
 
     /**
      * @var \Hebergement
@@ -123,18 +123,6 @@ class Reclamation
         return $this;
     }
 
-    public function getId(): ?User
-    {
-        return $this->id;
-    }
-
-    public function setId(?User $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
     public function getIdevent(): ?Evenement
     {
         return $this->idevent;
@@ -155,6 +143,18 @@ class Reclamation
     public function setIdtransport(?Transport $idtransport): self
     {
         $this->idtransport = $idtransport;
+
+        return $this;
+    }
+
+    public function getId(): ?User
+    {
+        return $this->id;
+    }
+
+    public function setId(?User $id): self
+    {
+        $this->id = $id;
 
         return $this;
     }

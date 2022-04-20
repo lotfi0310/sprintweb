@@ -5,8 +5,13 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         users_in_memory: { memory: null }
-        database_users:
-            entity: { class: App\Entity\User }
+        my_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -14,20 +19,18 @@ security:
         main:
             anonymous: lazy
             provider: users_in_memory
-            guard:
-                authenticators:
-                    - App\Security\AuthentificatorUsersAuthenticator
+
             form_login:
-                check_path: app_login
-                login_path: app_login
-                remember_me: true
-                csrf_token_generator: security.csrf.token_manager
-                default_target_path: index
-                # use_referer: true # Redirection to 'target_path' is being managed inside the success handler Listener below
-                success_handler: app.authentication_success_handler
+                check_path: login
+                login_path: login
+                provider: my_provider
+                default_target_path: /backhome
+
             logout:
-                path: security_logout
-                target: index
+                path: /logout
+
+
+
                 # where to redirect after logout
                 # target: app_any_route
 
@@ -40,5 +43,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: '^/backhome', roles: ROLE_ADMIN }
+
+

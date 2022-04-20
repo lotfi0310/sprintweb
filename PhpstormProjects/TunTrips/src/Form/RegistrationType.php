@@ -30,14 +30,15 @@ class RegistrationType extends AbstractType
                 ])
 
             ->add('role',ChoiceType::class,array(
-                'choices'=>array('ROLE_USER'=>'Simple User',
-                    'ROLE_FOURNISSEUR'=>'Fournisseur',
+                'choices'=>array('ROLE_USER'=>'ROLE_USER',
+                    'ROLE_FOURNISSEUR'=>'ROLE_FOURNISSEUR',
+
+
                     )
 
             ))
-            ->add('photo',FileType::class,[
-                'label' => '(png or jpg file)'
-            ])
+            ->add('photo',FileType::class,
+                array('label' => 'Photo (png, jpeg)'))
             ->add('numTel',NumberType::class)
             ->add('save',SubmitType::class)
 

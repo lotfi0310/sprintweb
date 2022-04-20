@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Codevalidation
  *
- * @ORM\Table(name="codevalidation", indexes={@ORM\Index(name="email", columns={"email"}), @ORM\Index(name="email_2", columns={"email"})})
- * @ORM\Entity
+ * @ORM\Table(name="codevalidation", indexes={@ORM\Index(name="email", columns={"email"})})
+ * @ORM\Entity(repositoryClass="App\Repository\CodevalidationRepository")
  */
 class Codevalidation
 {
@@ -28,13 +28,24 @@ class Codevalidation
      */
     private $code;
 
+    public function __toString():?string
+    {
+        return $this->idcode;
+        return $this->email;
+        return $this->code;
+        return $this->coderecMp;
+    }
+
+
     /**
-     * @var \User
+     * @var string|null
      *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="email", referencedColumnName="email")
-     * })
+     * @ORM\Column(name="coderec_mp", type="string", length=15, nullable=true)
+     */
+    private $coderecMp;
+
+    /**
+     * @ORM\Column(name="email", type="string", length=15, nullable=false)
      */
     private $email;
 
@@ -55,12 +66,24 @@ class Codevalidation
         return $this;
     }
 
-    public function getEmail(): ?User
+    public function getCoderecMp(): ?string
+    {
+        return $this->coderecMp;
+    }
+
+    public function setCoderecMp(?string $coderecMp): self
+    {
+        $this->coderecMp = $coderecMp;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(?User $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 

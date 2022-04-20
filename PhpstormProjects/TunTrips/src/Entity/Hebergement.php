@@ -20,13 +20,7 @@ class Hebergement
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idheberg;
-    public function __toString():String
-    {
-        return $this->idheberg;
 
-
-
-    }
     /**
      * @var string
      *

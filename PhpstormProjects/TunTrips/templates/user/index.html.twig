@@ -21,7 +21,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example2" class="table table-bordered table-hover">
+                        <table  id="example2" class="table table-bordered table-hover">
 
             <tr>
                 <th>Id</th>
@@ -54,8 +54,7 @@
                 <td>{{ user.valide ? 'Yes' : 'No' }}</td>
                 <td>{{ user.etat ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                   <button class=" btn-flat"> <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a></button>
                 </td>
             </tr>
         {% else %}
