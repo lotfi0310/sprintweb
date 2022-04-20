@@ -1,0 +1,64 @@
+
+
+
+{% extends 'baseFront.html.twig' %}
+
+{% block content %}
+    <style>
+        .img{
+            width: 60px;
+            height: 70px;
+            background-size: cover;
+            display: block;
+            border-radius: 100px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+        }
+    </style>
+    <h1>Transport  </h1>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>     <th>type voiture</th>
+            <th>nombre de place</th>
+            <th>immatricule</th>
+            <!--<th>disponible</th>-->
+            <th>lieu disponibilité</th>
+
+            <th>Reservation</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for Transport in b %}
+            <tr>
+                <td>{{ Transport.type }}</td>
+                <td>{{ Transport.capacite }}</td>
+                <td>{{ Transport.immatricule }}</td>
+                <!--  <td>{{ Transport.dispo }}</td>-->
+                <td>{{ Transport.lieudispo }}</td>
+                <!--<td>{{ Transport.iduser }}</td>-->
+
+                <td>
+                    <a class="btn btn-success" href="{{ path('app_revtransport_new',{'id':Transport.id}) }}">Reserver</a>
+                </td>
+
+            </tr>
+
+
+        {% endfor %}
+
+        </tbody>
+    </table><br>
+    <center>
+        <div>
+    <a href="{{ path('addTransport') }}">    <h3> <span class="right badge bg-gradient-primary">Créer un offre de transport
+            </span></h3></a>
+
+    <a href="{{ path('myrev') }}">    <h3><span class="right badge bg-gradient-primary">Voir mes réservations</span>
+        </h3></a>
+    <a href="{{ path('mylist') }}">    <h3> <span class="right badge bg-gradient-primary">Voir mes offres de transports
+            </span></h3></a></div></center>
+
+{% endblock %}
+

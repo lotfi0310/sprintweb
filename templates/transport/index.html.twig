@@ -1,0 +1,69 @@
+
+
+
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <style>
+        .img{
+            width: 60px;
+            height: 60px;
+            background-size: cover;
+            display: block;
+            border-radius: 100px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+        }
+    </style>
+    <h1>Transport  </h1>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>type voiture</th>
+            <th>nombre de place</th>
+            <th>immatricule</th>
+            <!--<th>disponible</th>-->
+            <th>lieu disponibilité</th>
+
+            <th>Modification</th>
+            <th>Reservation</th>
+
+            <th>Suppression</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for Transport in b %}
+            <tr>
+                <td>{{ Transport.id }}</td>
+
+                <td>{{ Transport.type }}</td>
+                <td>{{ Transport.capacite }}</td>
+                <td>{{ Transport.immatricule }}</td>
+                <!--  <td>{{ Transport.dispo }}</td>-->
+                <td>{{ Transport.lieudispo }}</td>
+                <!--<td>{{ Transport.iduser }}</td>-->
+                <td>
+                    <a class="btn btn-success" href="{{ path('modifTransport',{'id':Transport.id}) }}">Modifier</a>
+                </td>
+                <td>
+                    <a class="btn btn-success" href="{{ path('app_revtransport_new',{'id':Transport.id}) }}">Reserver</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" href="{{ path('supp_Transport',{'id':Transport.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <a href="{{ path('app_revtransport_index') }}">    <h4> <span class="right badge bg-gradient-warning">Voir la liste des réservations</span></h4></a>
+
+    <a href="{{ path('addTransport') }}">    <h4> <span class="right badge bg-gradient-warning">Créer un offre de transport</span></h4></a></div>
+
+
+{% endblock %}
+

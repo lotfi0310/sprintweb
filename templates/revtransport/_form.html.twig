@@ -1,0 +1,24 @@
+{{ form_start(form,{
+    'attr':{
+        novalidate:'true'
+    }
+}) }}
+
+{{ form_row(form.depart, { 'attr': {'class': 'form-control ', 'placeholder': "Départ" } }) }}
+
+{{ form_errors(form.depart) }}
+{{ form_row(form.destination, { 'attr': {'class': 'form-control ', 'placeholder': "Destination" } }) }}
+{{ form_row(form.distance, { 'attr': {'class': 'form-control ', 'placeholder': "Distance en km" } }) }}
+
+<a href="{{ path('Appmaps')}}" target="_blank">    <h4><span class="right badge bg-gradient-primary">calcul distance</span>
+    </h4></a>
+
+{{ form_row(form.prix, { 'attr': {'class': 'form-control ', 'placeholder': "Prix en Dt" } }) }}
+
+
+<br>
+<button class="btn btn-success">{{ button_label|default('Save') }}</button>
+<br>
+
+{{ form_end(form) }}
+

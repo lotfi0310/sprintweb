@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="container">
+    <h1>Reservation</h1>
+
+    {{ include('revtransport/_form.html.twig') }}
+<br>
+
+    <a href="{{ path('app_revtransport_index') }}">back to list</a>
+</div>
+{% endblock %}

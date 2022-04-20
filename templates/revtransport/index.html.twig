@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des réservations{% endblock %}
+
+{% block content %}
+    <style>
+        .img{
+            width: 60px;
+            height: 60px;
+            background-size: cover;
+            display: block;
+            border-radius: 100px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+        }
+    </style>
+<h1>Liste des réservations</h1>
+
+                <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Iduser</th>
+                <th>Idtransport</th>
+                <th>Depart</th>
+                <th>Destination</th>
+                <th>Distance</th>
+                <th>Prix</th>
+                <th>Modifier</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for revtransport in b %}
+            <tr>
+                <td>{{ revtransport.id }}</td>
+                <td>{{ revtransport.iduser }}</td>
+                <td>{{ revtransport.idtransport }}</td>
+                <td>{{ revtransport.depart }}</td>
+                <td>{{ revtransport.destination }}</td>
+                <td>{{ revtransport.distance }}</td>
+                <td>{{ revtransport.prix }}</td>
+                <td>
+                    <a class="btn btn-success" href="{{ path('app_revtransport_edit', {'id': revtransport.id}) }}">Modifier</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
