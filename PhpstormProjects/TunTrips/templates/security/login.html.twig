@@ -1,54 +1,58 @@
-
 {% extends 'front_office/base.html.twig' %}
-
-{% block content %}
-    <div style="background-color: #0a0e14">
-{% block title %}.{% endblock %}
-
-<div style="height: 45rem; margin-top: 10rem; border: #0a001f">
-    <form  action="{{ path('login') }}" method="post" >
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-
-
-
-        <h1 class="h3 mb-3 font-weight-normal"></h1>
-        <div class="row">
-            <div class="offset-md-1 col-md-10" style="margin-bottom: 2rem";>
-                <h5 style="font-style: oblique; color: #FFFFFF; font-max-size: large; ">Login</h5>
-
-            </div>
-
-
-            <div class="offset-md-1 col-md-10">
-                <label style="color: #FFFFFF; " for="inputEmail">Email</label>
-                <input type="email" value="{{ lastusername }}" name="_username" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Email here">
-            </div>
-            <div class="offset-md-1 col-md-10">
-
-                <label style="color: #FFFFFF; " for="inputPassword">Password</label>
-                <input type="password" name="_password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="password here ">
-
-            </div>
-
-            <div class="offset-md-1 col-md-6" style="margin-top: 3rem;" >
-
-                <button class="btn btn-lg btn-primary" type="submit">
-                    Sign in
-                </button>
-            </div>
-
-        </div>
-
-        <div class="checkbox mb-3 " style="margin-left:11rem; margin-top :2rem ;">
-            <label style="color: #FFFFFF">
-                <input type="checkbox" name="_remember_me"  > Remember me
-            </label>
-        </div>
-
-
-    </form>
+{% block content  %}
+<head>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Transparent Sign In Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Meta tag Keywords -->
+    <!-- css files -->
+    <link rel="stylesheet" href={{ asset('login/css/font-awesome.css')  }}> <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href={{asset('login/css/style.css')  }} type="text/css" media="all" /> <!-- Style-CSS -->
+    <!-- //css files -->
+    <!-- web-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <!-- //web-fonts -->
+</head>
+<body>
+<!--header-->
+<div class="header-w3l">
+    <h1>TunTrip SignIn Form </h1>
+    {{ form_start(formL,{'attr':{'novalidate':'novalidate'}}) }}
 </div>
+<!--//header-->
+<!--main-->
+<div  style="padding-top: 5rem;" class="main-content-agile">
+    <div class="sub-main-w3">
+        <h2>Sign In</h2>
+
+            <h6>use your email</h6>
+            <div class="icon1">
+                {{ form_widget(formL.email) }}
+                {{ form_errors(formL.passwd) }}
+            </div>
+
+            <div class="icon2">
+                {{ form_widget(formL.passwd) }}
+                {{ form_errors(formL.passwd) }}
+            </div>
+            <label class="anim">
+                <input type="checkbox" class="checkbox">
+                <span>Remember Me</span>
+                <a href="{{ path('recuperepass')}}">Forget Password?</a>
+            </label>
+            <div class="clear"></div>
+            <input type="submit" value="Sign in">
+
     </div>
+
+</div>
+{{ form_end(formL) }}
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script src="js/jquery.vide.min.js"></script>
+</body>
+
 {% endblock %}

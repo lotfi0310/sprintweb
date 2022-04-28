@@ -66,7 +66,7 @@ class Evenement
     /**
      * @var int
      *
-     * @ORM\Column(name="capacite", type="integer", nullable=false)
+     * @ORM\Column(name="capacite", type="integer", nullable=true)
      */
     private $capacite;
 
@@ -95,6 +95,11 @@ class Evenement
         $this->nom = $nom;
 
         return $this;
+    }
+
+    public function __toString():string
+    {
+       return  $this->idevent;
     }
 
     public function getDateDebut(): ?\DateTimeInterface

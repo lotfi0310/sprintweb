@@ -1,26 +1,62 @@
 {% extends 'front_office/base.html.twig' %}
 {% block content %}
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div  class="form-control" style="height: 45rem; margin-top: 5rem;">
-                    <form id="quickForm" method="post" action="{{ path('validation1') }}">
-                        <div class="card-body">
-                            <div style="margin-top: 5rem;" class="form-group">
-                                <label for="exampleInputEmail1">code recu par mail</label>
-                                <input type="text" class="form-control" placeholder="Enter code" name="code" >
-                                <input type="hidden" value="{{ id }}" name="id">
-                            </div>
+    <head>
+        <title>Classy Register Form Responsive Widget Template :: W3layouts</title>
+        <!-- Meta tag Keywords -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="Classy Register Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+            function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <!-- Meta tag Keywords -->
+        <!-- css files -->
+        <link href={{ asset('registry/css/style.css ') }}rel="stylesheet" type="text/css" media="all">
+        <!-- //css files -->
+        <!-- online-fonts -->
+        <link href="//fonts.googleapis.com/css?family=Cuprum:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
+        <!--//online-fonts -->
+    </head>
+    <body>
+    <div  style=" padding-top:2rem; height:17rem;" class="header">
 
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Valider</button>
-                        </div>
-                    </form>
+    </div>
+    <div class="w3-main">
+        <!-- Main -->
+        <div class="about-bottom main-agile book-form">
+
+            <h2 class="tittle">Valider votre Compte </h2>
+            <form id="quickForm" method="post" action="{{ path('validation1') }}">
+                <div class="form-date-w3-agileits">
+                    <label for="exampleInputEmail1">code recu par mail</label>
+                    <input type="text" class="form-control" placeholder="Enter code" name="code" >
+                    <input type="hidden" value="{{ id }}" name="id">
                 </div>
-            </div>
-        </div>
-    </section>
+                <div class="make wow shake">
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+
+        <!-- //Main -->
+    </div>
+    <!-- footer -->
+    <div class="footer-w3l">
+        <p>&copy; 2017 Classy Register Form. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+    </div>
+    <!-- //footer -->
+    <!-- js-scripts-->
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script>$(document).ready(function(c) {
+            $('.alert-close').on('click', function(c){
+                $('.main-agile').fadeOut('slow', function(c){
+                    $('.main-agile').remove();
+                });
+            });
+        });
+    </script>
+    <!-- //js-scripts-->
+    </div>
+    </body>
+
 
 {% endblock %}

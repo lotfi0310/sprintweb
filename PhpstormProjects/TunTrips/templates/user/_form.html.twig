@@ -1,33 +1,21 @@
 
-{% extends 'front_office/base.html.twig' %}
-<title>New User</title>
-<div class="main-top" id="home">
+
+    <div class="main-top" id="home">
     <!-- banner -->
-    <div class="main-banner">
-        <div class="container-fluid">
-            <div class="style-banner ">
-                <div class="row">
 
-
-                    <div class="col-lg-8 col-md-8 col-sm-9">
-                        <div class="banner-right-txt">
-                            {% block content %}
+        <div class="container ">
+            <div class="container-sm" style="padding-top: 7rem;  ">
 
 
 
                                 {{ form_start(form) }}
                                 {{ form_widget(form) }}
-                                <button class="btn">{{ button_label|default('Save') }}</button>
                                 {{ form_end(form) }}
 
-                            {% endblock %}
 
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- //banner -->
-</div>
+

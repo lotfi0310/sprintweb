@@ -35,6 +35,10 @@ class Transport
      */
     private $photo;
 
+    public function __toString():string
+    {
+        return  $this->idtransport;
+    }
     /**
      * @var string
      *

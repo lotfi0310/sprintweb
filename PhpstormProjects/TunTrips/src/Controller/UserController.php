@@ -20,14 +20,16 @@ class UserController extends AbstractController
     /**
      * @Route("/users", name="app_user_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager,Request $request): Response
     {
+        $data=$request->getSession()->get('Data');
         $users = $entityManager
             ->getRepository(User::class)
             ->findAll();
 
         return $this->render('user/index.html.twig', [
             'users' => $users,
+            'data'=> $data
         ]);
     }
 
@@ -36,10 +38,13 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}", name="app_user_show", methods={"GET"})
      */
-    public function show(User $user,EntityManagerInterface $em): Response
+    public function show(User $user,EntityManagerInterface $em,Request $request): Response
     {
+        $data=$request->getSession()->get('Data');
+
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'data'=>$data
         ]);
     }
 
@@ -48,6 +53,8 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
+        $data=$request->getSession()->get('Data');
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -75,5 +82,7 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 
 }

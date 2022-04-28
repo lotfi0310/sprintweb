@@ -1,0 +1,56 @@
+{% extends 'front_office/base.html.twig' %}
+
+{% block content %}
+    <form method="post" action="{{ path('userrec') }}">
+    <section class="contact py-lg-4 py-md-3 py-sm-3 py-3" id="contact"  >
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3" style="height: 46rem; overflow: hidden;">
+            <h1  class="offset-md-4" style="margin-top: 2rem ;">Mes reclamations</h1>
+            <table class="table"  style="margin-top: 2rem;">
+                <thead>
+                <tr>
+                    <th>Type de service</th>
+                    <th>contenu de reclamation</th>
+                    <th>Etat de votre reclamation </th>
+                    <th>Date de Reclamation </th>
+                    <th>Plus</th>
+                    <th>Modifier</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for reclamation in reclamation %}
+                    {% if reclamation %}
+                    <tr>
+                        {% if reclamation.idevent %}
+                        <td>Evenement</td>
+                            {% elseif reclamation.idheberg %}
+                                <td>Hébergement</td>
+                            {% elseif reclamation.idtransport %}
+                                <td>Transport</td>
+                                {% endif %}
+                        <td>{{ reclamation.contenu}}</td>
+                        {% if reclamation.etat==0 %}
+                      <td> Votre reclamation n'a pas encore traiter par l admin</td>
+                            {% else  %}
+                                <td> Votre reclamation est traiter </td>
+                                 {% endif %}
+                        <td>{{ reclamation.date ? reclamation.date|date('Y-m-d') : '' }}</td>
+
+                        <td><button class="btn-success btn" > plus d'info </button></td>
+                        <td><button class=" btn-warning btn fa-1x offset-md-1" > Edit </button></td>
+
+
+                    </tr>
+    {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+        {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        </section>
+    </form>
+{% endblock %}

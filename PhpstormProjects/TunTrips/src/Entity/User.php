@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 use PhpParser\Node\Scalar\String_;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface,\Serializable
+class User
 {
     /**
      * @var int
@@ -74,7 +75,6 @@ class User implements UserInterface,\Serializable
 
     /**
      * @var string
-     *
      * @ORM\Column(name="role", type="string", length=255, nullable=false)
      */
     private $role;
@@ -174,9 +174,10 @@ class User implements UserInterface,\Serializable
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getRole():?string
     {
         return $this->role;
+
     }
 
     public function setRole(string $role): self
@@ -239,50 +240,5 @@ class User implements UserInterface,\Serializable
         return $this->email;
 
     }
-    public function getSalt()
-    {
-        // TODO: Implement getSalt() method.
-    }
-
-    public function eraseCredentials()
-    {
-        // TODO: Implement eraseCredentials() method.
-    }
-
-    public function getUsername()
-    {
-        return $this->email;
-
-    }
-
-    public function getPassword()
-    {
-        return $this->passwd;
-
-    }
-
-    public function serialize():?string
-    {
-
-        return $this->id;
-    }
-
-    public function unserialize($string)
-    {
-        list(
-            $this->id,
-            $this->nom,
-            $this->prenom,
-            $this->email,
-            $this->photo,
-            $this->passwd
-            )=$this->unserialize($string ,['allowed_classes'=>false]);    }
-
-
-    public function getRoles()
-    {
-        return['ROLE_USER'];
-    }
-
 
 }

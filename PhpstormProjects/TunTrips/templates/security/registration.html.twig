@@ -1,26 +1,63 @@
-{% extends 'front_office/base.html.twig'%}
-
-{% block content %}
-
-    <section   class="contact py-lg-4 py-md-3 py-sm-3 py-3" id="contact" >
-    <div class="container py-lg-5 py-md-4 py-sm-4 py-3" >
-<div style="height: 50rem; margin-top : 1rem;">
-    {{ form_start(form) }}
-    {{ form_row(form.nom,{'attr':{'placeholder':'Entrer votre Nom'}}) }}
-    {{ form_row(form.prenom,{'attr':{'placeholder':'Entrer votre prenom'}}) }}
-    {{ form_row(form.email,{'attr':{'placeholder':'Entrer votre adress mail...'}}) }}
-    {{ form_row(form.passwd,{'attr':{'placeholder':'Entrer votre mot de passe!'}}) }}
-    {{ form_row(form.confirm_password,{'attr':{'placeholder':'Confirmer  votre mot de passe !'}}) }}
-    {{ form_row(form.country,{'attr':{'placeholder':' selectionner votre pays'}}) }}
-    {{ form_row(form.role,{'attr':{'placeholder':'choisir un role'}}) }}
-    {{ form_row(form.photo,{'attr':{'placeholder':'selectionner une image  '}}) }}
-    {{ form_row(form.numTel,{'attr':{'placeholder':'Ecriver votre numero  '}}) }}
-
-    {{ form_end(form) }}
+{% extends 'front_office/base.html.twig' %}
+{% block content  %}
+<head>
+    <title>Classy Register Form Responsive Widget Template :: W3layouts</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Classy Register Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Meta tag Keywords -->
+    <!-- css files -->
+    <link href={{ asset('registry/css/style.css') }} rel="stylesheet" type="text/css" media="all">
+    <!-- //css files -->
+    <!-- online-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Cuprum:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
+    <!--//online-fonts -->
+</head>
+<body>
+<div style="padding-top: 8rem;" class="header">
+    <h1></h1>
 </div>
-
-
-
+<div class="w3-main">
+    <!-- Main -->
+    <div class="about-bottom main-agile book-form">
+        <div class="alert-close"> </div>
+        <h2 class="tittle">Register Here</h2>
+        {{ form_start(form) }}
+            <div class="form-date-w3-agileits">
+                {{ form_row(form.nom,{'attr':{'placeholder':'Entrer votre Nom'}}) }}
+                {{ form_row(form.prenom,{'attr':{'placeholder':'Entrer votre prenom'}}) }}
+                {{ form_row(form.email,{'attr':{'placeholder':'Entrer votre adress mail...'}}) }}
+                {{ form_row(form.passwd,{'attr':{'placeholder':'Entrer votre mot de passe!'}}) }}
+                {{ form_row(form.confirm_password,{'attr':{'placeholder':'Confirmer  votre mot de passe !'}}) }}
+                {{ form_row(form.country,{'attr':{'placeholder':'selectionner votre pays'}}) }}
+                {{ form_row(form.role,{'attr':{'placeholder':'choisir un role'}}) }}
+                {{ form_row(form.photo,{'attr':{'placeholder':'selectionner une image  '}}) }}
+                {{ form_row(form.numTel,{'attr':{'placeholder':'Ecriver votre numero  '}}) }}
+            </div>
+            <div class="make wow shake">
+                <input type="submit" value="Register">
+            </div>
+        {{ form_end(form) }}
     </div>
-    </section>
+    <!-- //Main -->
+</div>
+<!-- footer -->
+
+<!-- //footer -->
+<!-- js-scripts-->
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script>$(document).ready(function(c) {
+        $('.alert-close').on('click', function(c){
+            $('.main-agile').fadeOut('slow', function(c){
+                $('.main-agile').remove();
+            });
+        });
+    });
+</script>
+<!-- //js-scripts-->
+</body>
 {% endblock %}

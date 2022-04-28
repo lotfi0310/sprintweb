@@ -26,8 +26,7 @@ class RegistrationType extends AbstractType
             ->add('email',EmailType::class)
             ->add('passwd',PasswordType::class)
             ->add('confirm_password',PasswordType::class)
-            ->add('country',CountryType::class, [
-                ])
+            ->add('country',CountryType::class)
 
             ->add('role',ChoiceType::class,array(
                 'choices'=>array('ROLE_USER'=>'ROLE_USER',
@@ -40,7 +39,6 @@ class RegistrationType extends AbstractType
             ->add('photo',FileType::class,
                 array('label' => 'Photo (png, jpeg)'))
             ->add('numTel',NumberType::class)
-            ->add('save',SubmitType::class)
 
         ;
     }

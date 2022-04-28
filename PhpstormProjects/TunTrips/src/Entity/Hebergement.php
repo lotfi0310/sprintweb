@@ -34,6 +34,10 @@ class Hebergement
      * @ORM\Column(name="photo", type="string", length=255, nullable=false)
      */
     private $photo;
+    public function __toString():string
+    {
+        return  $this->idheberg;
+    }
 
     /**
      * @var string

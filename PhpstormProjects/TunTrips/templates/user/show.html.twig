@@ -16,7 +16,7 @@
 
 
     <section class="content">
-    <div class="container-fluid">
+    <div class="select2-container--bootstrap4">
     <div class="row">
     <div class="col-12">
     <div class="card">
@@ -79,12 +79,8 @@
     </table>
 
     <form class="form-group vertical">
-        <button class="btn-flat"> <a href="{{ path('app_user_index') }}">back to list</a></button>
-
-
-        <button class="btn-flat"> <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a></button>
-
-        {{ include('user/_delete_form.html.twig') }}
+        <button class="btn btn-success"> <a href="{{ path('app_user_index') }}">back to list</a></button>
+        <button class=" btn btn-secondary"> <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a></button>
     </form>
 
 {% endblock %}

@@ -1,10 +1,10 @@
 {% extends 'back_office/base.html.twig' %}
 
 {% block content %}
-<section class="contact py-lg-4 py-md-3 py-sm-3 py-3" id="contact"  >
-    <div class="container py-lg-5 py-md-4 py-sm-4 py-3" style="height: 46rem; overflow: hidden;">
-    <h1 style="margin-top: 2rem;">List reclamation</h1>
-    <table class="table" style="margin-top: 4rem;">
+<section class="select2-container--bootstrap4" id="contact"  >
+    <div class="select2-container--bootstrap4" style="height: 46rem; overflow: hidden;">
+    <h1  class="mb-2 offset-md-4" style="margin-top: 2rem;">List reclamation</h1>
+    <table class="table" style="margin-top: 2rem;">
         <thead>
             <tr>
                 <th>Id User </th>
@@ -32,6 +32,7 @@
                 <td>
                     <button class="btn-flat"><a href="{{ path('app_reclamation_show', {'idrec': reclamation.idrec}) }}">show</a></button>
                     <button class="btn-flat"><a href="{{ path('app_reclamation_edit', {'idrec': reclamation.idrec}) }}">edit</a></button>
+                    <button class="btn-flat"><a href="{{ path('app_reclamation_delete', {'idrec': reclamation.idrec}) }}">delete</a></button>
                 </td>
             </tr>
         {% else %}

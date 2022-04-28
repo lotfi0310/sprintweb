@@ -28,12 +28,12 @@ class UserType extends AbstractType
             ])
 
             ->add('role',ChoiceType::class,array(
-                'choices'=>array('ROLE_USER'=>'Simple User',
-                    'ROLE_FOURNISSEUR'=>'Fournisseur',
+                'choices'=>array('ROLE_USER'=>'ROLE_USER',
+                    'ROLE_FOURNISSEUR'=>'ROLE_FOURNISSEUR',
                 )
 
             ))
-            ->add('file', FileType::class, array('data_class' => null))
+            ->add('photo', FileType::class, array('data_class' => null))
             ->add('numTel',NumberType::class)
             ->add('save',SubmitType::class)
         ;

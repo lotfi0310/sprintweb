@@ -1,9 +1,4 @@
-<!--A Design by W3layouts
-  Author: W3layout
-  Author URL: http://w3layouts.com
-  License: Creative Commons Attribution 3.0 Unported
-  License URL: http://creativecommons.org/licenses/by/3.0/
-  -->
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -59,8 +54,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <input type="checkbox" id="drop">
             <ul class="menu mt-2">
                 <li class="active">
-                    <a href="index.html">Home</a>
-                </li>
+                    <a href="{{ path('home') }}" class="drop-text">Home </a>                </li>
                 <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
                     <a href="about.html">About</a>
                 </li>
@@ -72,19 +66,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <label for="drop-2" class="toggle toogle-2">Dropdown
                         <span class="fa fa-angle-down" aria-hidden="true"></span>
                     </label>
-                    <a href="#">Dropdown
-                        <span class="fa fa-angle-down" aria-hidden="true"></span>
-                    </a>
-                    <input type="checkbox" id="drop-2">
-                    <ul>
-                        <li>
-                            <a href="gallery.html" class="drop-text">Gallery</a>
-                        </li>
 
-                        <li>
-                            <a href="blog.html" class="drop-text">Blog</a>
-                        </li>
-                    </ul>
+                     <a href="{{ path('login') }}" class="drop-text">Log Out </a>
+                        <span class="fa fa-angle-down" aria-hidden="true"></span>
+                    <input type="checkbox" id="drop-2">
+
                 </li>
                 <li>
                     <a href="{{ path('security_registration') }}">Sign UP</a>

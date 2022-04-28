@@ -72,6 +72,20 @@ class Reclamation
      */
     private $id;
 
+    public function __toString():string
+    {
+        return $this->idrec;
+        return $this->idevent;
+        return $this->idheberg;
+        return $this->idtransport;
+        return $this->id;
+        return $this->date;
+        return $this->contenu;
+        return $this->etat;
+
+    }
+
+
     /**
      * @var \Hebergement
      *
@@ -170,6 +184,8 @@ class Reclamation
 
         return $this;
     }
+
+
 
 
 }
