@@ -6,6 +6,7 @@
 package com.mycompany.Utils;
 
 import com.codename1.io.Preferences;
+import com.codename1.ui.Image;
 
 /**
  *
@@ -24,6 +25,8 @@ public class SessionManager {
     private static String email; 
     private static String passowrd ;
     private static String photo;
+    private static Image imgs ;
+    private static String role ; 
 
     public static Preferences getPref() {
         return pref;
@@ -73,6 +76,15 @@ public class SessionManager {
          pref.set("photo",photo);
     }
 
+    public static String getRole() {
+        return pref.get("role",role);
+    }
+
+    public static void setRole(String role) {
+      pref.set("role",role);
+    }
+    
+
     public static String getPrenom() {
          return pref.get("prenom",prenom);
 
@@ -82,6 +94,15 @@ public class SessionManager {
                  pref.set("prenom",prenom);
 
     }
+
+    public static Image getImgs() {
+        return imgs;
+    }
+
+    public static void setImgs(Image imgs) {
+        SessionManager.imgs = imgs;
+    }
+    
     
     
     
