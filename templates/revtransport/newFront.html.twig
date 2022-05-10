@@ -1,0 +1,13 @@
+{% extends 'baseFront2.html.twig' %}
+
+{% block content %}<body>
+    <div class="container" style="padding-top: 8rem ;">
+        <h1>Reservation</h1>
+
+        {{ include('revtransport/_form.html.twig') }}
+        <br>
+
+        <a href="{{ path('app_revtransport_index') }}">back to list</a>
+    </div>
+    </body>
+{% endblock %}

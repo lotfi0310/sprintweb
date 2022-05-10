@@ -1,9 +1,10 @@
-{% extends 'baseFront.html.twig' %}
+{% extends 'baseFront2.html.twig' %}
 
-{% block title %}Liste des réservations {% endblock %}
 
 {% block content %}
-<div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: 150px;">
+    {% block title %}f{% endblock %}
+
+    <div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: 150px;padding-top: 4rem ;padding-bottom: 6rem ;  ">
 
     <div class="col-lg-6">
 
@@ -35,7 +36,7 @@
                 <td>{{ revtransport.distance }}</td>
                 <td>{{ revtransport.prix }}</td>
                 <td>
-                    <a href="{{ path('app_revtransport_edit', {'id': revtransport.id}) }}">edit</a>
+                    <a href="{{ path('editrev', {'id': revtransport.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

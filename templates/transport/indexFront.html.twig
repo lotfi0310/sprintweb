@@ -7,7 +7,7 @@
     <style>
         .img{
             width: 60px;
-            height: 70px;
+            height: 150px;
             background-size: cover;
             display: block;
             border-radius: 100px;
@@ -15,7 +15,7 @@
             -moz-border-radius: 100px;
         }
     </style>
-    <h1>Transport  </h1>
+    <h1 style="padding-top: 8rem ;">Transport  </h1>
 
     <table class="table table-bordered table-hover">
         <thead>
@@ -40,7 +40,7 @@
                 <!--<td>{{ Transport.iduser }}</td>-->
 
                 <td>
-                    <a class="btn btn-success" href="{{ path('app_revtransport_new',{'id':Transport.id}) }}">Reserver</a>
+                    <a class="btn btn-success" href="{{ path('newRev',{'id':Transport.id}) }}">Reserver</a>
                 </td>
 
             </tr>
@@ -52,13 +52,20 @@
     </table><br>
     <center>
         <div>
-    <a href="{{ path('addTransport') }}">    <h3> <span class="right badge bg-gradient-primary">Créer un offre de transport
+    <a href="{{ path('addFront') }}" class="btn.btn-app">    <h3>
+            <span  class="btn btn-outline-info btn-block btn-flat" >Créer un offre de transport
             </span></h3></a>
 
-    <a href="{{ path('myrev') }}">    <h3><span class="right badge bg-gradient-primary">Voir mes réservations</span>
+    <a  href="{{ path('myrev') }}">    <h3><span  class="btn btn-outline-info btn-block btn-flat" >Voir mes réservations</span>
         </h3></a>
-    <a href="{{ path('mylist') }}">    <h3> <span class="right badge bg-gradient-primary">Voir mes offres de transports
-            </span></h3></a></div></center>
+
+    <a href="{{ path('mylist') }}">    <h3> <span  class="btn btn-outline-info btn-block btn-flat">Voir mes offres de transports
+            </span></h3></a></div>
+
+    <a href="{{ path('Gmaps') }}" target="_blank">    <h3><span  class="btn btn-outline-info btn-block btn-flat" >Guide des directions </span>
+            <a href="maps.html"></a>
+        </h3></a></center>
+
 
 {% endblock %}
 

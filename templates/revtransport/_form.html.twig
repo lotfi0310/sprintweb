@@ -8,13 +8,26 @@
 
 {{ form_errors(form.depart) }}
 {{ form_row(form.destination, { 'attr': {'class': 'form-control ', 'placeholder': "Destination" } }) }}
-{{ form_row(form.distance, { 'attr': {'class': 'form-control ', 'placeholder': "Distance en km" } }) }}
+{{ form_row(form.distance, { 'attr': {'class': 'form-control ', 'placeholder': "Distance en km"} }) }}
 
-<a href="{{ path('Appmaps')}}" target="_blank">    <h4><span class="right badge bg-gradient-primary">calcul distance</span>
+<a href="{{ path('maps') }}" target="_blank">    <h4><span class="right badge bg-gradient-primary">calcul distance</span>
+        <a href="maps.html"></a>
     </h4></a>
+<div  id="price" onmouseenter="myFunction()">
 
-{{ form_row(form.prix, { 'attr': {'class': 'form-control ', 'placeholder': "Prix en Dt" } }) }}
+    {{ form_row(form.prix, { 'attr': {'class': 'form-control ', 'placeholder': "Prix en Dt" } }) }}</div>
+<script>
+    function myFunction() {
+        {
+            document.querySelector('[id=revtransport_prix]').value
+                =document.querySelector('[id=revtransport_distance]').value*0.4.toFixed(2);
+        }
+    }
 
+
+
+
+</script>
 
 <br>
 <button class="btn btn-success">{{ button_label|default('Save') }}</button>

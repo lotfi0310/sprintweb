@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Revtransport;
 use App\Entity\Transport;
 use App\Form\TransportType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,7 +43,7 @@ class TransportController extends AbstractController
 
 
     /**
-     * @Route("/front", name="display_admin")
+     * @Route("/front", name="display_front")
      */
     public function indexAdmin(): Response
     {        $Transports = $this->getDoctrine()->getManager()->getRepository(Transport::class)->findAll();
@@ -74,10 +76,35 @@ class TransportController extends AbstractController
         }
         return $this->render('Transport/createTransport.html.twig',['f'=>$form->createView()]);
 
+    }
+
+
+    /**
+     * @Route("/addFront", name="addFront")
+     */
+    public function addFrontTransport(Request $request): Response
+    {
+        $Transport = new Transport();
+
+        $form = $this->createForm(TransportType::class,$Transport);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($Transport);//Add
+            $em->flush();
+
+            return $this->redirectToRoute('display_Front');
+        }
+        return $this->render('Transport/createFrontTransport.html.twig',['f'=>$form->createView()]);
+
 
 
 
     }
+
+
 
     /**
      * @Route("/removeTransport/{id}", name="supp_Transport")
@@ -117,7 +144,32 @@ class TransportController extends AbstractController
     }
 
 
+    /**
+     * @Route("/Gmaps", name="Gmaps")
+     */
+    public function maps(EntityManagerInterface $entityManager): Response
+    {
+
+        $transports = $entityManager->getRepository(Revtransport::class)->findBy([
+            "iduser" => 58 //idUser
+
+        ]);
+        return $this->render('transport/guideMaps.html.twig', [
+            'b'=>$transports
+        ]);
+    }
+
+
+   /** public function searchTransport(Request $request, NormalizerInterface $Normalizer)
+    {
+        $repository = $this->getDoctrine()->getRepository(transport::class);
+        $requestString = $request->get('searchValue');
+        $transport = $repository->findHebergementByAddress($requestString);
+        $jsonContent = $Normalizer->normalize($transport, 'json',[]);
+
+        return new Response(json_encode($jsonContent));
 
 
 
-}
+
+}*/}

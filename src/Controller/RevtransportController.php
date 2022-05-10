@@ -43,7 +43,20 @@ class RevtransportController extends AbstractController
             'b'=>$revtransports
         ]);
     }
+    /**
+     * @Route("/maps", name="maps")
+     */
+    public function maps(EntityManagerInterface $entityManager): Response
+    {
 
+        $revtransports = $entityManager->getRepository(Revtransport::class)->findBy([
+            "iduser" => 58 //idUser
+
+        ]);
+        return $this->render('revtransport/maps.html.twig', [
+            'b'=>$revtransports
+        ]);
+    }
 
 
 
@@ -121,6 +134,28 @@ class RevtransportController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/editrev", name="editrev", methods={"GET", "POST"})
+     */
+    public function editrev(Request $request, Revtransport $revtransport, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(RevtransportType::class, $revtransport);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('myrev', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('revtransport/editFront.html.twig', [
+            'revtransport' => $revtransport,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
+    /**
      * @Route("/{id}", name="app_revtransport_delete", methods={"POST"})
      */
     public function delete(Request $request, Revtransport $revtransport, EntityManagerInterface $entityManager): Response
@@ -134,16 +169,33 @@ class RevtransportController extends AbstractController
     }
 
     /**
-     * @Route("/maps", name="Appmaps", methods={"GET", "POST"})
+     * @Route("/newRev/{id}", name="newRev", methods={"GET", "POST"})
      */
-    public function maps(EntityManagerInterface $entityManager): Response
+    public function newRev(Request $request, EntityManagerInterface $entityManager,$id): Response
     {
-        $revtransports = $entityManager->getRepository(Revtransport::class)->findBy([
-            "iduser" => 58 //idUser
+        $revtransport = new Revtransport();
+        $form = $this->createForm(RevtransportType::class, $revtransport);
+        $form->handleRequest($request);
 
-        ]);
-        return $this->render('revtransport/maps.html.twig', [
-            'b'=>$revtransports
+        if ($form->isSubmitted() && $form->isValid()) {
+            $revtransport->setIdtransport($id);
+            $revtransport->setIduser(8);//idUser
+
+
+
+            $entityManager->persist($revtransport);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('transport/display_Front', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('revtransport/newFront.html.twig', [
+            'revtransport' => $revtransport,
+            'form' => $form->createView(),
         ]);
     }
+
+
+
+
 }

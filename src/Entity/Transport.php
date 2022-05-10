@@ -83,7 +83,12 @@ class Transport
     {
         return $this->id;
     }
+    public function setId(string $id): self
+    {
+        $this->id = $id ;
 
+        return $this;
+    }
     public function getType(): ?string
     {
         return $this->type;
@@ -167,6 +172,19 @@ class Transport
 
         return $this;
     }
+
+    protected $captchaCode;
+
+    public function getCaptchaCode()
+    {
+        return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+        $this->captchaCode = $captchaCode;
+    }
+
 
 
 }
