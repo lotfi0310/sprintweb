@@ -1,0 +1,26 @@
+{{ form_start(form,{
+    'attr':{
+        novalidate:'true'
+    }
+}) }}
+
+{{ form_row(form.nom, { 'attr': {'class': 'form-control ', 'placeholder': "nom classe" } }) }}
+
+{{ form_errors(form.nom) }}
+{{ form_row(form.description, { 'attr': {'class': 'form-control ', 'placeholder': "nom classe" } }) }}
+{{ form_row(form.lieu, { 'attr': {'class': 'form-control ', 'placeholder': "nom classe" } }) }}
+{{ form_row(form.status, { 'attr': {'class': 'form-control ', 'placeholder': "nom classe" } }) }}
+{{ form_row(form.capacite, { 'attr': {'class': 'form-control ', 'placeholder': "nom classe" } }) }}
+{{ form_label(form.id, 'user') }}
+{{ form_widget(form.id, { 'attr': {'class': 'form-control ', 'placeholder': "nom classe" } }) }}
+
+{{ form_row(form.image, { 'attr': {'placeholder': "insere une image" } }) }}
+{{ form_row(form.dateDebut, { 'attr': {'placeholder': "nom classe" } }) }}
+{{ form_row(form.dateFin, { 'attr': {'placeholder': "nom classe" } }) }}
+
+
+<button class="btn btn-success">{{ button_label|default('Save') }}</button>
+<br>
+
+{{ form_end(form) }}
+

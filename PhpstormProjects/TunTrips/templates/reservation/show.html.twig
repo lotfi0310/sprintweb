@@ -1,0 +1,41 @@
+{% extends 'back_office/base.html.twig'%}
+{% block content %}
+    <head><link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+        <!-- make sure that jquery is included --!>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+    </head>
+    <
+    <h1>Reservation</h1>
+
+    <form  method="post" action="{{ path('app_reservation_delete', {'id': reservation.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cet hebergement ?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reservation.id) }}">
+        <button class="btn btn-danger btn-sm float-sm-right"><i class="fa fa-trash"></i></button>
+
+    </form>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reservation.id }}</td>
+            </tr>
+            <tr>
+                <th>DateEntre</th>
+                <td>{{ reservation.dateEntre ? reservation.dateEntre|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateSortie</th>
+                <td>{{ reservation.dateSortie ? reservation.dateSortie|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ reservation.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_reservation_index') }}">Back to list</a>
+
+    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}"><button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a>
+{% endblock %}

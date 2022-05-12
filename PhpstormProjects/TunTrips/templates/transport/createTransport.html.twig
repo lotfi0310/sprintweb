@@ -1,0 +1,90 @@
+
+{% extends 'base.html.twig' %}
+{% block content %}
+    <head>
+        <script>$(function(){
+                $("a[title ~= 'BotDetect']").removeAttr("style");
+                $("a[title ~= 'BotDetect']").removeAttr("href");
+                $("a[title ~= 'BotDetect']").css('visibility', 'hidden');
+            });</script>
+    </head>
+
+    <center>    <h1 style="padding-top: 8rem ;">Ajouter offre de transport</h1></center>
+
+
+    <br>
+    <div class="row" style="height: 50rem; ">
+        <div class="offset-md-2 col-md-8" >
+            <!-- General Form Elements -->
+            <div > {{ form_start(f,{attr:{novalidate:'novalidate'}}) }}
+
+
+
+                <label for="inputText" class="col-4 col-form-label">Type</label>
+                <div class="col-sm-10">
+                    {{ form_widget(f.type,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(f.type,{'attr':{'class':'text-danger'}}) }}
+
+                </div>
+
+
+
+                <label for="inputText"  class="col-4 col-form-label">capacite</label>
+                <div class="col-sm-10">
+                    {{ form_widget(f.capacite,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(f.capacite,{'attr':{'class':'text-danger'}}) }}
+
+                </div>
+
+                <label for="inputText" class="col-4 col-form-label">numéro de chauffeur</label>
+                <div class="col-sm-10">
+                    {{ form_widget(f.numchauffeur,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(f.numchauffeur,{'attr':{'class':'text-danger'}}) }}
+
+                </div>
+
+                <label for="inputText" class="col-4 col-form-label">Immatricule</label>
+                <div class="col-sm-10">
+                    {{ form_widget(f.immatricule,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(f.immatricule,{'attr':{'class':'text-danger'}}) }}
+
+                </div>
+
+                <label for="inputText" class="col-4 col-form-label">Disponabilité</label>
+                <div class="col-sm-10">
+                    {{ form_widget(f.dispo,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(f.dispo,{'attr':{'class':'text-danger'}}) }}
+
+                </div>
+
+                <label for="inputText" class="col-4 col-form-label">Lieu de disponabilité</label>
+                <div class="col-sm-10">
+                    {{ form_widget(f.lieudispo,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(f.lieudispo,{'attr':{'class':'text-danger'}}) }}
+
+                </div>
+
+
+                <br/>
+                <center>
+                    <div class="g-recaptcha" data-sitekey="6Lc8vIsfAAAAAF5z3pxQUfArtFQ13xnnBn-rQCax
+ "></div></center>
+                {{ form_row(f.captchaCode) }}
+
+
+                <div class="col-sm-10" style="display: flex;align-items: center;justify-content: center">
+
+                    {{ form_widget(f.Confirmer,{'attr':{'class':'btn btn-primary'}}) }}
+                </div>
+
+                {{ form_end(f) }}
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+    </section>
+{% endblock %}

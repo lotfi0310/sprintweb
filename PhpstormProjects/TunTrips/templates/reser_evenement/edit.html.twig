@@ -1,0 +1,15 @@
+{% extends 'back_office_ev/base.html.twig' %}
+
+{% block title %}
+    <title>Edit ReserEvenement</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Edit ReserEvenement</h1>
+
+    {{ include('reser_evenement/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_reser_evenement_index') }}">back to list</a>
+
+    {{ include('reser_evenement/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,99 @@
+
+
+
+{% extends 'back_office_ev/base.html.twig' %}
+
+{% block content %}
+
+
+    <div class="form-outline">
+
+
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+                var searchRequest = null;
+                $("#search").keyup(function() {
+                    var minlength = 1;
+                    var that = this;
+                    var value = $(this).val();
+                    var entitySelector = $("#entitiesNav").html('');
+                    if (value.length >= minlength ) {
+                        if (searchRequest != null)
+                            searchRequest.abort();
+                            searchRequest = $.ajax({
+                            type: "GET",
+                            url: "{{ path('ajax_search') }}",
+                            data: {
+                                'q' : value
+                            },
+                            dataType: "text",
+                            success: function(msg){
+                                //we need to check if the value is the same
+                                if (value===$(that).val()) {
+                                    var result = JSON.parse(msg);
+                                    $.each(result, function(key, arr) {
+                                        $.each(arr, function(id, value) {
+                                            if (key === 'evenements') {
+                                                if (id !== 'error') {
+                                                    entitySelector.append('<li><b>'+value[1]+'</b><a><img src="/assets/image/'+value[0]+'" style="width: 60px; height: 60px"/></a></li>');
+                                                } else {
+                                                    entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+    </div>
+<h2>Search An event!</h2>
+
+<div class="sidebar-search">
+
+    <div class="input-group custom-search-form">
+
+        <input type="text" id="search" class="form-control" placeholder="Search here">
+    </div>
+    <!-- /input-group -->
+</div>
+<ul class="nav" id="side-menu">
+    <li>
+        <a href="#"> <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level" id="entitiesNav">
+        </ul>
+    </li>
+
+
+    <table class="table table-bordered table-hover">
+
+        <tbody>
+        {% for evenement in evenements %}
+
+            <td>
+                <div class="container-fluid row">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ asset("uploads/images/")~evenement.image }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>nom: </strong>{{ evenement.nom }}</h5>
+                            <br>
+                            <p class="card-text"><strong>description: </strong>{{ evenement.description }}.</p>
+                            <a href="" class="btn btn-primary">show</a>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ pagerfanta(evenements) }}
+
+
+{% endblock %}

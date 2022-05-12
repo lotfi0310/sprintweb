@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Evenement
@@ -23,7 +24,7 @@ class Evenement
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
@@ -44,29 +45,41 @@ class Evenement
 
     /**
      * @var string
-     *
+     *  @Assert\NotBlank()
      * @ORM\Column(name="lieu", type="string", length=255, nullable=false)
      */
     private $lieu;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="status", type="string", length=255, nullable=false)
      */
     private $status;
 
+
+
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     *
+     */
+    private $image;
+
     /**
      * @var int
-     *
-     * @ORM\Column(name="capacite", type="integer", nullable=true)
+     * @Assert\NotBlank()
+     * @ORM\Column(name="capacite", type="integer", nullable=false)
      */
     private $capacite;
 
@@ -95,11 +108,6 @@ class Evenement
         $this->nom = $nom;
 
         return $this;
-    }
-
-    public function __toString():string
-    {
-       return  $this->idevent;
     }
 
     public function getDateDebut(): ?\DateTimeInterface
@@ -184,6 +192,22 @@ class Evenement
         $this->id = $id;
 
         return $this;
+    }
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function __toString():string
+    {
+        return $this->getNom();
     }
 
 

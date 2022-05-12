@@ -1,0 +1,12 @@
+{% extends 'back_office/base.html.twig'%}
+{% block content %}
+    <h1>Edit Reservation</h1>
+    <form  method="post" action="{{ path('app_reservation_delete', {'id': reservation.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cet hebergement ?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reservation.id) }}">
+        <button class="btn btn-danger btn-sm float-sm-right"><i class="fa fa-trash"></i></button>
+
+    </form>
+
+    {{ include('reservation/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}

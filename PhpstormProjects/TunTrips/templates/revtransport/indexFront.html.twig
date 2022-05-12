@@ -1,0 +1,55 @@
+{% extends 'baseFront2.html.twig' %}
+
+
+{% block content %}
+    {% block title %}f{% endblock %}
+
+    <div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: 150px;padding-top: 4rem ;padding-bottom: 6rem ;  ">
+
+    <div class="col-lg-6">
+
+        <div class="card">
+            <div class="card-body">
+<h1>Liste des réservations</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Iduser</th>
+                <th>Idtransport</th>
+                <th>Depart</th>
+                <th>Destination</th>
+                <th>Distance</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for revtransport in b %}
+            <tr>
+                <td>{{ revtransport.id }}</td>
+                <td>{{ revtransport.iduser }}</td>
+                <td>{{ revtransport.idtransport }}</td>
+                <td>{{ revtransport.depart }}</td>
+                <td>{{ revtransport.destination }}</td>
+                <td>{{ revtransport.distance }}</td>
+                <td>{{ revtransport.prix }}</td>
+                <td>
+                    <a href="{{ path('editrev', {'id': revtransport.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

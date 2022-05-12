@@ -11,41 +11,21 @@
 
 
 
-<div
-        style= " padding-top: 10rem;  color: #004fc5; background-color: #0a001f ;" class="container-xxl border-width-2">
+<div style= " padding-top: 15rem;  color: #f3f3f3; background-color: #4c91ad ;"
+     class="container-xxl border-width-2">
     <div class="row">
-        <div class="col-sm-10"><h1></h1></div>
+        <div class="col-sm-10"></div>
     </div>
-    <div class="row">
+    <div  style="height: 65rem;" class="row">
         <div class="col-sm-3"><!--left col-->
 
 
             <div class="text-center">
                 <img  src="{{ asset('uploads/images/')}}{{ data.photo }}"  alt="avatar" class="avatar img-circle img-thumbnail">
 
-            </div></hr><br>
-
-
-            <div class="panel panel-default">
-                <div class="panel-heading">TuntripsEsprit.com <i class="fa fa-link fa-1x"></i></div>
-                <div class="panel-body"><a href="http://bootnipets.com">TuntripsEsprit.com</a></div>
+                <h3 style="font-size: 50px;">{{ data.nom }} {{ data.prenom }}</h3>
             </div>
 
-
-            <ul class="list-group">
-                <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
-            </ul>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Social Media</div>
-                <div class="panel-body">
-                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
-                </div>
-            </div>
 
         </div><!--/col-3-->
         <div class="col-sm-9">
@@ -59,7 +39,7 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
 
-                    <hr>
+
                     <form class="form" action="{{ path('editprofileuser') }}" method="post"
                            id="registrationForm">
 
@@ -136,7 +116,6 @@
                         </div>
                     </form>
 
-                    <hr>
 
                 </div><!--/tab-pane-->
 

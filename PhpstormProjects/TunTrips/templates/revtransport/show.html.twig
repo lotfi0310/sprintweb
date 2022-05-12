@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Revtransport{% endblock %}
+
+{% block content %}
+    <h1>Revtransport</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ revtransport.id }}</td>
+            </tr>
+            <tr>
+                <th>Iduser</th>
+                <td>{{ revtransport.iduser }}</td>
+            </tr>
+            <tr>
+                <th>Idtransport</th>
+                <td>{{ revtransport.idtransport }}</td>
+            </tr>
+            <tr>
+                <th>Depart</th>
+                <td>{{ revtransport.depart }}</td>
+            </tr>
+            <tr>
+                <th>Destination</th>
+                <td>{{ revtransport.destination }}</td>
+            </tr>
+            <tr>
+                <th>Distance</th>
+                <td>{{ revtransport.distance }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ revtransport.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_revtransport_index') }}">back to list</a>
+
+    <a href="{{ path('app_revtransport_edit', {'id': revtransport.id}) }}">edit</a>
+
+    {{ include('revtransport/_delete_form.html.twig') }}
+{% endblock %}

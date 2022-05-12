@@ -1,0 +1,28 @@
+
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+    <div class="card card-primary">
+
+        <div class="card-body">
+        <form>
+            <div class="form-group">
+                <div class="form-group">
+                    {{ form_label(form.dateEntre, 'Date Debut'|trans, {'label_attr' : {'class': 'control-label' }}) }}
+                    {{ form_widget(form.dateEntre) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.dateSortie, 'Date Fin'|trans, {'label_attr' : {'class': 'control-label' }}) }}
+                    {{ form_widget(form.dateSortie) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.prix, 'Prix Total'|trans, {'label_attr' : {'class': 'control-label' }}) }}
+                    {{ form_widget(form.prix) }}
+                </div>
+
+            </div>
+
+            <a class="btn btn-success" href="{{ path('app_reservation_index') }}">Back to list</a>
+            <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+        </form>
+    </div>
+</div>
+{{ form_end(form) }}

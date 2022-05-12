@@ -1,0 +1,17 @@
+
+
+
+
+
+{% extends 'back_office_ev/base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Create new Evenement</h1>
+
+        {{ include('evenement/_form.html.twig') }}
+
+        <a href="{{ path('app_evenement_index') }}">back to list</a>
+    </div>
+
+{% endblock %}

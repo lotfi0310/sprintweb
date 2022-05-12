@@ -78,9 +78,12 @@
         </tbody>
     </table>
 
-    <form class="form-group vertical">
-        <button class="btn btn-success"> <a href="{{ path('app_user_index') }}">back to list</a></button>
-        <button class=" btn btn-secondary"> <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a></button>
+    <form class="form-group vertical" method="get" action="{{ 'blocker' }}">
+        <input type="hidden",name="id",value="{{ user.id }}">
+        <button class="btn-flat"> <a href="{{ path('app_user_index') }}">back to list</a></button>
+        <button class="btn-flat"> <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a></button>
+        <button class="btn-flat"> <a href="{{ path('blocker', {'id': user.id}) }}">Blocker</a></button>
+
     </form>
 
 {% endblock %}

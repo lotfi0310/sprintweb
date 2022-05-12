@@ -27,7 +27,9 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Serializer\SerializerInterface;
 use function PHPUnit\Framework\isNull;
+
 
 
 /**
@@ -46,10 +48,9 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
            $hash=md5($user->getPasswd());
             $user->setPasswd($hash);
-
             $file = $form->get('photo')->getData();
-
-            $file_name = md5(uniqid()) . '.' . $file->guessExtension();
+            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $file_name = $originalFilename . '.' . $file->guessExtension();
             try {
 
                 $file->move(
@@ -59,10 +60,11 @@ class SecurityController extends AbstractController
             } catch (FileException $e) {
             }
             $user->setPhoto($file_name);
+
             $user->setValide(false);
             $manager->persist($user);
             $manager->flush();
-            $c = $this->generateRandomString();
+            $cc = $this->generateRandomString();
             $email = (new Email())
                 ->from('tuntrips2022@gmail.com')
                 ->to($user->getEmail())
@@ -70,13 +72,14 @@ class SecurityController extends AbstractController
                 //->replyTo('fabien@example.com')
                 //->priority(Email::PRIORITY_HIGH)
                 ->subject('Time for Symfony Mailer!')
-                ->text('valider votre compte en appuions sur le lien ci dessous ')
-                ->html($c);
+                ->text('valider votre compte en copions le code dans le site web ')
+                ->html($cc);
 
 
             $mailer->send($email);
             $code = new Codevalidation();
-            $code->setCode($c);
+            $code->setCode($cc);
+            $code->setCoderecMp("");
             $code->setEmail($user->getEmail());
             $manager->persist($code);
             $manager->flush();
@@ -86,6 +89,7 @@ class SecurityController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
     /**
      * @Route ("/login",name="login")
      */
@@ -103,6 +107,7 @@ class SecurityController extends AbstractController
             if($mail!="" && $pass!="") {
                 $exist=$userRepository->findOneBy(['email' =>$mail]);
                 $us =$userRepository->findOneBy(['email' => $mail,'passwd'=>md5($pass)]);
+
                 if ($exist!=null){
                     if ($us!=null){
                         if ($us->getValide()==1){
@@ -259,14 +264,12 @@ class SecurityController extends AbstractController
 
         $code = $request->request->get('code');
         $id = $request->request->get('id');
-        $user = new User();
         $user = $this->getDoctrine()
             ->getRepository(User::class)
             ->find((int)$id);
-        $userCode = new Codevalidation();
         $u = $user->getEmail();
         $userCode = $this->getDoctrine()
-            ->getRepository(Codevalidation::class)->findOneBy(['email' => $u]);
+            ->getRepository(Codevalidation::class)->findOneBy(['email'=>$u]);
 
         if ((string)$code== $userCode->getCode()) {
          $user->setValide('true');
@@ -319,7 +322,8 @@ class SecurityController extends AbstractController
             $coder = $this->getDoctrine()
                 ->getRepository(Codevalidation::class)
                 ->findOneBy(['email'=>$email]);
-            $coder->setCoderecMp($code);
+            $cc=new Codevalidation();
+            $cc->setCoderecMp($code);
             $em=$this->getDoctrine()->getManager();
             $em->flush();
             $mail = (new Email())
@@ -383,6 +387,18 @@ if ($pass1!=null && $pass2!=null){
         return $this->render('front_office/default/new_password.html.twig');
 
     }
+    /**
+     * @Route ("/block/{id}",name="blocker" )
+     */
 
+    public function block(int $id,Request $request,UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    {
+        $data=$request->getSession()->get('Data');
+        $id=$request->request->get('id');
+        $user=$userRepository->find($id);
+        $user->setEtat(false);
+        $entityManager->flush();
+        return $this->render('user/index.html.twig',['id'=>$id,'data'=>$data]) ;
+    }
 
 }

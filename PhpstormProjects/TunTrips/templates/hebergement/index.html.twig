@@ -1,0 +1,158 @@
+{% extends 'base.html.twig'%}
+
+
+{% block content %}
+    <h1>Hebergement List</h1>
+
+
+    <div class="input-group input-group-sm ">
+        <input class="form-control col-sm-12 col-md-6" type="text" aria-controls="example1" id="search" placeholder="Search" aria-label="Search">
+
+        <div class="col-sm-12 col-md-6">
+            <div class="input-group-append">
+                <button class=" btn btn-navbar" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="pagination list-inline text-center float-sm-right">
+                <li>{{ knp_pagination_render(hebergement) }}</li>
+            </ul>
+        </div>
+    </div>
+    <table id="t" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Address</th>
+                <th>Type</th>
+                <th>Capacitechambre</th>
+                <th>Disponibilite</th>
+                <th>Disponibilite Parking</th>
+                <th>Photo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="all">
+        {% for heberg in hebergement %}
+            <tr>
+                <td>{{ heberg.idheberg }}</td>
+                <td>{{ heberg.address }}</td>
+                <td>{{ heberg.type }}</td>
+                <td>{{ heberg.capacitechambre }}</td>
+                {% if heberg.disponibilite==1 %}
+                <td>Disponible</td>
+                {% else  %}
+                    <td>Indisponible</td>
+                    {% endif %}
+                {% if heberg.disponibiliteParking==1 %}
+                    <td>Avec parking</td>
+                {% else  %}
+                    <td>Sans Parking</td>
+                {% endif %}
+                <td><img  src="{{ asset('uploads/images/' ~ heberg.photo) }}" width="70" height="70"></td>
+                <td>
+                    <a href="{{ path('app_hebergement_edit', {'idheberg': heberg.idheberg}) }}"><button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a>
+                    <form method="post" action="{{ path('app_hebergement_delete', {'idheberg': heberg.idheberg}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cet hebergement ?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ heberg.idheberg) }}">
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tbody id="search">
+        </tbody>
+    </table>
+
+
+    <a class="btn btn-primary" href="{{ path('app_hebergement_new') }}">Create new</a>
+
+    <div class="container">
+        <canvas id="hebergement" width="400" height="100"></canvas>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script>
+        $( document ).ready(function() {
+            $("#search").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte afin d’effectuer la recherche */
+                var value = $(this).val();
+                /* Ajax est lancé lors du remplissage du champ texte dont l’id est « search » pour faire la recherche */
+                $.ajax({
+                    /* l’url est une chaine de caractères contenant l’adresse où la requête est envoyée */
+                    url : "{{ path('search_heber') }}",
+                    /* La méthode utilisée pour transférer les données est GET */
+                    type : 'GET',
+                    /*Ici search value va prendre la chaine entrée par un utilisateur dans la zone de recherche et sera placée après l’url */
+                    data: {
+                        'searchValue' : value
+                    },
+                    /*Cette fonction permet de vider le contenu du tableau pour recevoir le nouveau contenu*/
+                    success : function(retour){
+                        //console.log(retour);
+                        if(retour){
+                            $('#t tbody#search').empty();
+                            $.each(JSON.parse(retour), function(i, obj) {
+                                $('#t tbody#all').hide();
+                                $('#t tbody#search').append(
+                                    '<tr><td> '+obj.idheberg+' ' +
+                                    ' </td><td>    '+obj.address+'' +
+                                    '  </td><td>'+obj.type+'' +
+                                    '  </td><td>'+obj.capacitechambre+'' +
+                                    '  </td><td>'+obj.disponibilite+'' +
+                                    '  </td><td>'+obj.disponibilite_parking+'' +
+                                    '  </td><td><img src="/uploads/images/'+obj.photo+'" width="70" height="70">' +
+                                    '</td><td><a class="btn btn-success btn-sm rounded-0" href="/hebergement/'+obj.idheberg+'"><i class="fa fa-eye"></i></a> <a class="btn btn-primary btn-sm rounded-0" href="/hebergement/'+obj.idheberg+'/edit"><i class="fa fa-edit"></a></td></tr>');
+                            });
+                        }
+                        else
+                        {
+                            $('#t tbody#all').show();
+                            $('#t tbody#search').empty();
+                            $('#t tbody#search').fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <script>
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        let hebergement = document.querySelector("#hebergement")
+        let heberGraph = new Chart(hebergement, {
+            type: "pie",
+            data: {
+                labels: {{ heberAddress|raw }},
+                datasets: [{
+                    label: "Répartition des Herbergerments",
+                    data: {{ heberCap|raw }},
+                    backgroundColor: [getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor(),getRandomColor()]
+                }]
+            }
+        })
+    </script>
+{% endblock %}

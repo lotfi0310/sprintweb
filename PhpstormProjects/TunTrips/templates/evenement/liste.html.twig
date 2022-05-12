@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<div class="container">
+    <h1>Liste des evenements</h1>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Idevent</th>
+            <th>Nom</th>
+            <th>DateDebut</th>
+            <th>DateFin</th>
+            <th>Lieu</th>
+            <th>Description</th>
+            <th>Status</th>
+{#            <th>Image</th>#}
+            <th>Capacite</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.idevent }}</td>
+                <td>{{ evenement.nom }}</td>
+                <td>{{ evenement.dateDebut ? evenement.dateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.lieu }}</td>
+                <td>{{ evenement.description }}</td>
+                <td>{{ evenement.status }}</td>
+{#                <td><img  src="{{ asset("uploads/images/")~evenement.image }}" alt="" class="img" width="50px"></td>#}
+                <td>{{ evenement.capacite }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

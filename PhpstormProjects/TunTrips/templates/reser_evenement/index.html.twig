@@ -1,0 +1,42 @@
+{% extends 'back_office_ev/base.html.twig' %}
+
+
+
+{% block content %}
+    <title>ReserEvenement index</title>
+    <h1>ReserEvenement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdReser</th>
+                <th>DateReservation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reser_evenement in reser_evenements %}
+            <tr>
+                <td>{{ reser_evenement.idReser }}</td>
+                <td>{{ reser_evenement.dateReservation ? reser_evenement.dateReservation|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_reser_evenement_edit', {'idReser': reser_evenement.idReser}) }}"class="btn btn-success">edit</a>
+                </td>
+                <td>
+                    <form method="post" action="{{ path('app_reser_evenement_delete', {'idReser': reser_evenement.idReser}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reser_evenement.idReser) }}">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reser_evenement_new') }}">Create new</a>
+{% endblock %}

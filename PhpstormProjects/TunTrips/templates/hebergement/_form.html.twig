@@ -1,0 +1,44 @@
+
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+<div class="card card-primary">
+
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+                <div class="form-group">
+                    {{ form_label(form.address, 'Address Hebergement'|trans, {'label_attr' : {'class': 'control-label' }}) }}
+                    {{ form_widget(form.address) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.type, 'Type Hebergement'|trans, {'label_attr' : {'class': 'control-label' }}) }}
+                    {{ form_widget(form.type) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.tarif, 'Tarif Hebergement'|trans, {'label_attr' : {'class': 'control-label' }}) }}
+                    {{ form_widget(form.tarif) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.capacitechambre, 'Capacite Chambre Hebergement'|trans, {'label_attr' : {'class': 'control-label' }}) }}
+                    {{ form_widget(form.capacitechambre) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.disponibilite, 'Disponibilite Hebergement'|trans, {'label_attr' : {'class': 'control-label' }}) }}
+                    {{ form_widget(form.disponibilite) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.disponibilite_parking, 'Disponibilite Parking Hebergement'|trans, {'label_attr' : {'class': 'control-label' }}) }}
+                    {{ form_widget(form.disponibilite_parking) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.photo, 'Photo'|trans, {'label_attr' : {'class': 'control-label' }}) }}
+                    {{ form_widget(form.photo) }}
+                </div>
+
+            </div>
+
+            <a class="btn btn-success" href="{{ path('app_hebergement_index') }}">Back to list</a>
+            <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+        </form>
+    </div>
+</div>
+{{ form_end(form) }}

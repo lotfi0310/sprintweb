@@ -1,0 +1,107 @@
+{% extends 'front_office/base.html.twig' %}
+
+{% block content %}
+    <h1>Reservation index</h1>
+    <div class="input-group input-group-sm ">
+        <input class="form-control col-sm-12 col-md-6" type="text" aria-controls="example1" id="search" placeholder="Search" aria-label="Search">
+
+        <div class="col-sm-12 col-md-6">
+            <div class="input-group-append">
+                <button class=" btn btn-navbar" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="pagination list-inline text-center float-sm-right">
+                <li>{{ knp_pagination_render(reservation) }}</li>
+            </ul>
+        </div>
+    </div>
+    <table id="t" class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>DateEntre</th>
+            <th>DateSortie</th>
+            <th>Prix</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody id="all">
+        {% for reser in reservation %}
+            <tr>
+                <td>{{ reser.id }}</td>
+                <td>{{ reser.dateEntre ? reser.dateEntre|date('Y-m-d') : '' }}</td>
+                <td>{{ reser.dateSortie ? reser.dateSortie|date('Y-m-d') : '' }}</td>
+                <td>{{ reser.prix }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_edit', {'id': reser.id}) }}"><button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a>
+                    <form method="post" action="{{ path('app_reservation_delete', {'id': reser.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cet Reservation ?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reser.id) }}">
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tbody id="search">
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_reservation_new') }}">Create new</a>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script>
+        $( document ).ready(function() {
+            $("#search").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte afin d’effectuer la recherche */
+                var value = $(this).val();
+                /* Ajax est lancé lors du remplissage du champ texte dont l’id est « search » pour faire la recherche */
+                $.ajax({
+                    /* l’url est une chaine de caractères contenant l’adresse où la requête est envoyée */
+                    url : "{{ path('search_reserv') }}",
+                    /* La méthode utilisée pour transférer les données est GET */
+                    type : 'GET',
+                    /*Ici search value va prendre la chaine entrée par un utilisateur dans la zone de recherche et sera placée après l’url */
+                    data: {
+                        'searchValue' : value
+                    },
+                    /*Cette fonction permet de vider le contenu du tableau pour recevoir le nouveau contenu*/
+                    success : function(retour){
+                        //console.log(retour);
+                        if(retour){
+                            $('#t tbody#search').empty();
+                            $.each(JSON.parse(retour), function(i, obj) {
+                                $('#t tbody#all').hide();
+                                $('#t tbody#search').append(
+                                    '<tr><td> '+obj.id+' ' +
+                                    ' </td><td>    '+obj.dateEntre+'' +
+                                    '  </td><td>'+obj.dateSortie+'' +
+                                    '  </td><td>'+obj.prix+'' +
+                                    '</td><td><a class="btn btn-success btn-sm rounded-0" href="/reservation/'+obj.id+'"><i class="fa fa-eye"></i></a> <a class="btn btn-primary btn-sm rounded-0" href="/reservation/'+obj.id+'/edit"><i class="fa fa-edit"></a></td></tr>');
+                            });
+                        }
+                        else
+                        {
+                            $('#t tbody#all').show();
+                            $('#t tbody#search').empty();
+                            $('#t tbody#search').fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock %}

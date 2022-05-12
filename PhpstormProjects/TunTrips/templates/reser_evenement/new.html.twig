@@ -1,0 +1,13 @@
+{% extends 'back_office_ev/base.html.twig' %}
+
+{% block title %}
+    <title>New ReserEvenement</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Create new ReserEvenement</h1>
+
+    {{ include('reser_evenement/_form.html.twig') }}
+
+    <a href="{{ path('app_reser_evenement_index') }}">back to list</a>
+{% endblock %}

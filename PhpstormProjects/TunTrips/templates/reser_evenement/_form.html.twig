@@ -1,0 +1,9 @@
+{{ form_start(form) }}
+    {{ form_label(form.id,'nom utilisateur') }}
+    {{ form_widget(form.id) }}
+    {{ form_label(form.idevent,'nom event') }}
+    {{ form_widget(form.idevent) }}
+    {{ form_label(form.dateReservation,'date') }}
+    {{ form_widget(form.dateReservation) }}
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

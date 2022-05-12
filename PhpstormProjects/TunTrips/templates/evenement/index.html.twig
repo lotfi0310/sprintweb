@@ -1,0 +1,85 @@
+
+
+
+{% extends 'back_office_ev/base.html.twig' %}
+
+{% block content %}
+    <style>
+        .img{
+            width: 60px;
+            height: 60px;
+            background-size: cover;
+            display: block;
+            border-radius: 100px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+        }
+    </style>
+    <h1>Evenement  </h1><a href="{{ path('List_evennement') }}" class="btn btn-info float-right">pdf</a>
+
+ <a href="{{ path('app_evenement_new') }}">     <span class="right badge badge-danger">Create evenemenet</span></a></div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Idevent</th>
+                <th>Nom</th>
+                <th>DateDebut</th>
+                <th>DateFin</th>
+                <th>Lieu</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Image</th>
+                <th>Capacite</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tr>
+            <form method="" action="{{ path('evenement_search') }}">
+                <label>
+                    <input PLACEHOLDER="Search" type="text" name="data" class="form-control">
+                </label>
+                <input type="submit" class="btn btn-success" value="FIND">
+            </form>
+        </tr>
+        <form method="post" action="{{ path('app_evenement_index') }}">
+            <label>
+                <select class="form-control" name="type">
+                    <option>Croissant</option>
+                    <option>Décroissant</option>
+                </select>
+            </label>
+            <input type="submit" class="btn btn-success" value="Trier Capacité">
+        </form>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.idevent }}</td>
+                <td>{{ evenement.nom }}</td>
+                <td>{{ evenement.dateDebut ? evenement.dateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.lieu }}</td>
+                <td>{{ evenement.description }}</td>
+                <td>{{ evenement.status }}</td>
+                <td><img  src="{{ asset("uploads/images/")~evenement.image }}" alt="" class="img"></td>
+                <td>{{ evenement.capacite }}</td>
+                <td>
+                    <a href="{{ path('app_evenement_edit', {'idevent': evenement.idevent}) }}"class="btn btn-success">edit</a>
+                </td>
+                <td>
+                    <form method="post" action="{{ path('app_evenement_delete', {'idevent': evenement.idevent}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.idevent) }}">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

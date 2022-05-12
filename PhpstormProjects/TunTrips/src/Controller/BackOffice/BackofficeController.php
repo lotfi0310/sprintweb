@@ -17,6 +17,15 @@ class BackofficeController extends AbstractController
         return $this->render('reclamation/choixtyperec.html.twig') ;
 
     }
+    /**
+     * @Route("/backhome", name="app_backoffice")
+     */
+    public function index(): Response
+    {
+        return $this->render('back_office/default/index.html.twig', [
+            'controller_name' => 'BackofficeController',
+        ]);
+    }
 
 
 

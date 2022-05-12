@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Revtransport{% endblock %}
+
+{% block content %}
+    <h1>Edit Revtransport</h1>
+
+    {{ include('revtransport/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_revtransport_index') }}">back to list</a>
+
+    {{ include('revtransport/_delete_form.html.twig') }}
+{% endblock %}
